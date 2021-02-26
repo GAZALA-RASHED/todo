@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Component} from 'react'
+import ToDoItem from './Components/toDoItems/todoItems'
+import AddItem from "./Components/AddItems/AddItems"
 
-function App() {
+class App extends Component{
+  state={
+    items:[
+      { id:1,name:"ahmad",age:20},
+      { id:2,name:"ali",age:22},
+       { id:3,name:"amal",age:19}
+    ]
+  }
+  deleteItem = (id)=>{
+    /*
+  let items=this.state.items;
+  let i=items.findIndex(item=>item.id === id )
+  items.splice(i,1)
+  this.setState({items})
+  */
+ let items=this.state.items.filter(item =>{
+   return item.id !== id
+ })
+ this.setState({items})
+  }
+  render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <div>ToDoListApp</div>
+     <ToDoItem items={this.state.items} deleteItem={this.deleteItem} />
+ 
+     <AddItem/>
     </div>
   );
+}
 }
 
 export default App;
